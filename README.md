@@ -23,6 +23,12 @@ Building Energy Management System (BEMS) based on .NET 10.
 $env:ConnectionStrings__Postgres="Host=<host>;Port=5432;Database=bems;Username=<user>;Password=<password>"
 ```
 
+Initialize DB schema/extension:
+
+```powershell
+.\infra\db\run-init.ps1 -Host <host> -Database bems -Username <user> -Password <password>
+```
+
 2. Run web app:
 
 ```powershell

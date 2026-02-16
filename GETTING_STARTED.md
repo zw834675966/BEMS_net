@@ -6,6 +6,12 @@
 $env:ConnectionStrings__Postgres="Host=<host>;Port=5432;Database=bems;Username=<user>;Password=<password>"
 ```
 
+Initialize schema and Timescale extension:
+
+```powershell
+.\infra\db\run-init.ps1 -Host <host> -Database bems -Username <user> -Password <password>
+```
+
 ## 2. Run Web App
 
 ```powershell
