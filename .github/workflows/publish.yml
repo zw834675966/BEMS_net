@@ -1,0 +1,34 @@
+name: publish
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish-web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore BEMS.slnx
+
+      - name: Publish Bems.Web
+        run: dotnet publish src/Bems.Web/Bems.Web.csproj -c Release -o out/web --no-restore
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bems-web-publish
+          path: out/web

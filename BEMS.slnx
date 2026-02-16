@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Bems.Application/Bems.Application.csproj" />
+    <Project Path="src/Bems.Gateway.Worker/Bems.Gateway.Worker.csproj" />
+    <Project Path="src/Bems.Web/Bems.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Bems.Application.Tests/Bems.Application.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+  push:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore BEMS.slnx
+
+      - name: Build
+        run: dotnet build BEMS.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test BEMS.slnx -c Release --no-build --verbosity normal
+
+      - name: Format Check
+        run: dotnet format BEMS.slnx --verify-no-changes --verbosity diagnostic
