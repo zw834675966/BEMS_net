@@ -13,14 +13,14 @@ Building Energy Management System (BEMS) based on .NET 10.
 ## Prerequisites
 
 - .NET SDK 10.0.x
-- Docker Desktop (for local PostgreSQL)
+- PostgreSQL 16+ (TimescaleDB optional)
 
 ## Quick Start (Local)
 
-1. Start database:
+1. Configure database connection (PowerShell):
 
 ```powershell
-docker compose up -d postgres
+$env:ConnectionStrings__Postgres="Host=<host>;Port=5432;Database=bems;Username=<user>;Password=<password>"
 ```
 
 2. Run web app:
@@ -51,6 +51,8 @@ If your app listens on a different port, use the port shown in console output.
   - format check
 - Publish workflow: `.github/workflows/publish.yml`
   - builds web publish artifact on `main`
+- Production deployment workflow: `.github/workflows/deploy-production.yml`
+  - deploys `main` to Azure App Service (`production` environment protected)
 
 ## Staging Deployment (App Service)
 
@@ -60,6 +62,15 @@ Required repository variables/secrets:
 
 - `vars.AZURE_WEBAPP_NAME_STAGING`: App Service name
 - `secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING`: publish profile XML
+
+## Production Deployment (App Service)
+
+Workflow: `.github/workflows/deploy-production.yml`
+
+Required repository variables/secrets:
+
+- `vars.AZURE_WEBAPP_NAME_PRODUCTION`: App Service name
+- `secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PRODUCTION`: publish profile XML
 
 ## Notes
 

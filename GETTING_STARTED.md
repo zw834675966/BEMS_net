@@ -1,9 +1,9 @@
 # BEMS MVP Quickstart
 
-## 1. Start PostgreSQL + TimescaleDB
+## 1. Configure PostgreSQL connection
 
 ```powershell
-docker compose up -d postgres
+$env:ConnectionStrings__Postgres="Host=<host>;Port=5432;Database=bems;Username=<user>;Password=<password>"
 ```
 
 ## 2. Run Web App
